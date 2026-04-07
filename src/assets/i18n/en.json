@@ -1,0 +1,22 @@
+{
+  "LEGAL_AI": {
+    "TITLE": "Legal AI workspace",
+    "SUBTITLE": "Reserved SHAP Legal AI vertical slice for the upcoming business workflow prompt.",
+    "STATUS_LABEL": "Gateway handshake",
+    "REFRESH": "Refresh reserved route",
+    "CREATE_PLACEHOLDER": "Create placeholder command",
+    "LOADING": "Checking gateway availability...",
+    "ROUTES": "Reserved contracts",
+    "NEXT_STEPS": "What this scaffold already reserves",
+    "NEXT_STEPS_ITEMS": {
+      "ROUTE": "Gateway proxy namespace",
+      "SERVICE": "Dedicated legal_ai_service bootstrap",
+      "SLICE": "Feature-slice frontend surface"
+    }
+  },
+  "SHELL": {
+    "TITLE": "SHAP Legal AI",
+    "SUBTITLE": "Sibling scaffold",
+    "LEGAL_AI": "Legal AI"
+  }
+}

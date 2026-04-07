@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons')
+
+:root
+  --legal-color-ink: #1a2530
+  --legal-color-ink-muted: #516171
+  --legal-color-surface: #f7f1e7
+  --legal-color-surface-strong: #fffdf8
+  --legal-color-surface-deep: #102435
+  --legal-color-surface-accent: #d9b36a
+  --legal-color-line: rgba(16, 36, 53, 0.12)
+  --legal-color-success: #2f6b3d
+  --legal-color-warning: #9d6810
+  --legal-color-danger: #a33d2f
+  --legal-radius-lg: 24px
+  --legal-radius-md: 16px
+  --legal-shadow-soft: 0 18px 40px rgba(16, 36, 53, 0.12)
+  --legal-shadow-card: 0 10px 24px rgba(16, 36, 53, 0.08)
+  --legal-sidebar-width: 112px
+  --legal-font-display: 'Fraunces', Georgia, serif
+  --legal-font-body: 'Manrope', 'Segoe UI', sans-serif
+
+html, body
+  height: 100%
+  margin: 0
+  padding: 0
+  font-family: var(--legal-font-body)
+  box-sizing: border-box
+
+*, *::before, *::after
+  box-sizing: inherit
+
+body
+  min-height: 100%
+  color: var(--legal-color-ink)
+  background: radial-gradient(circle at top left, rgba(217, 179, 106, 0.24), transparent 32%), linear-gradient(180deg, #fbf7ef 0%, #f5ede0 100%)
+
+button, input, textarea
+  font: inherit
+
+h1, h2, h3, h4
+  margin: 0
+  font-family: var(--legal-font-display)
+
+p
+  margin: 0
+
+.app-shell
+  min-height: 100vh
+
+.panel-area
+  min-height: 100vh
+
+@media (max-width: 768px)
+  body
+    background: linear-gradient(180deg, #fbf7ef 0%, #f2e8d8 100%)

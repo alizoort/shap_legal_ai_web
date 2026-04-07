@@ -1,0 +1,19 @@
+.sidebar-layout
+  display: grid
+  grid-template-columns: var(--legal-sidebar-width) minmax(0, 1fr)
+  min-height: 100vh
+
+.sidebar-layout__rail
+  background: linear-gradient(180deg, rgba(16, 36, 53, 0.98), rgba(21, 47, 69, 0.94))
+  box-shadow: 8px 0 28px rgba(16, 36, 53, 0.16)
+
+.sidebar-layout__content
+  min-width: 0
+  padding: 24px
+
+@media (max-width: 768px)
+  .sidebar-layout
+    grid-template-columns: 1fr
+
+  .sidebar-layout__content
+    padding: 16px

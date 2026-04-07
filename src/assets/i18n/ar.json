@@ -1,0 +1,22 @@
+{
+  "LEGAL_AI": {
+    "TITLE": "مساحة العمل القانونية الذكية",
+    "SUBTITLE": "هيكل SHAP Legal AI المحجوز بانتظار تعريف تدفق العمل الفعلي.",
+    "STATUS_LABEL": "فحص بوابة الخدمة",
+    "REFRESH": "تحديث المسار المحجوز",
+    "CREATE_PLACEHOLDER": "تنفيذ أمر تجريبي",
+    "LOADING": "جاري التحقق من البوابة...",
+    "ROUTES": "العقود المحجوزة",
+    "NEXT_STEPS": "ما الذي يحجزه هذا الهيكل الآن",
+    "NEXT_STEPS_ITEMS": {
+      "ROUTE": "مسار البوابة",
+      "SERVICE": "إقلاع خدمة legal_ai_service",
+      "SLICE": "سطح الواجهة المقطّع"
+    }
+  },
+  "SHELL": {
+    "TITLE": "SHAP Legal AI",
+    "SUBTITLE": "هيكل شقيق",
+    "LEGAL_AI": "الذكاء القانوني"
+  }
+}

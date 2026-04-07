@@ -1,0 +1,18 @@
+{
+  "maxLines": [],
+  "browserGlobals": [],
+  "duplicateContracts": [],
+  "nonOnPushUiComponents": [],
+  "oversizedUiComponents": [],
+  "uiServiceInjection": [],
+  "pageDecompositionDebt": [
+    {
+      "file": "src/app/feature/pages/demo.page.ts",
+      "max": 400,
+      "owner": "arch",
+      "reason": "expired fixture",
+      "expiresOn": "2020-01-01",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    }
+  ]
+}

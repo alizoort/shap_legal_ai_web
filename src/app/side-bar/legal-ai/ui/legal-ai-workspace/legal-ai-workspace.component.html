@@ -1,0 +1,37 @@
+<section class="legal-ai-workspace panel-area">
+  <div class="legal-ai-workspace__hero">
+    <div class="legal-ai-workspace__eyebrow">Reserved scaffold</div>
+    <h1>{{ vm.title }}</h1>
+    <p>{{ vm.subtitle }}</p>
+
+    <div class="legal-ai-workspace__actions">
+      <button mat-flat-button color="primary" type="button" (click)="emitCommand('refresh')">
+        {{ vm.loading ? 'Refreshing...' : 'Refresh route' }}
+      </button>
+      <button mat-stroked-button type="button" (click)="emitCommand('create-placeholder-request')">
+        Create placeholder command
+      </button>
+    </div>
+  </div>
+
+  <div class="legal-ai-workspace__grid">
+    <mat-card class="legal-ai-workspace__card">
+      <div class="legal-ai-workspace__card-label">Gateway status</div>
+      <div class="legal-ai-workspace__status">
+        <mat-chip [class.legal-ai-workspace__chip--ok]="vm.statusTone === 'ok'">
+          {{ vm.statusLabel }}
+        </mat-chip>
+      </div>
+      <p>{{ vm.syncMessage }}</p>
+    </mat-card>
+
+    <mat-card class="legal-ai-workspace__card">
+      <div class="legal-ai-workspace__card-label">Reserved contracts</div>
+      <ul class="legal-ai-workspace__routes">
+        @for (route of vm.reservedRoutes; track route) {
+          <li>{{ route }}</li>
+        }
+      </ul>
+    </mat-card>
+  </div>
+</section>

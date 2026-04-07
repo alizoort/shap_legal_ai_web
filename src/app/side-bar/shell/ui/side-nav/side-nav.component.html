@@ -1,0 +1,17 @@
+<nav class="side-nav" aria-label="Sidebar navigation">
+  <div class="side-nav__brand">
+    <span class="material-icons">balance</span>
+  </div>
+
+  @for (item of navigation; track item.panel) {
+    <a
+      class="side-nav__link"
+      [class.side-nav__link--active]="item.panel === activePanel"
+      [routerLink]="['/sideBar', item.panel]"
+      [attr.aria-current]="item.panel === activePanel ? 'page' : null"
+    >
+      <span class="material-icons">{{ item.icon }}</span>
+      <span class="side-nav__label">{{ item.label }}</span>
+    </a>
+  }
+</nav>

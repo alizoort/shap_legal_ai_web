@@ -1,0 +1,9 @@
+{
+  "maxLines": [],
+  "browserGlobals": [],
+  "duplicateContracts": [],
+  "nonOnPushUiComponents": [],
+  "oversizedUiComponents": [],
+  "uiServiceInjection": [],
+  "pageDecompositionDebt": []
+}

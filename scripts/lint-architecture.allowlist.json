@@ -1,0 +1,73 @@
+{
+  "maxLines": [
+    {
+      "file": "src/app/side-bar/courses/state/courses-admin.facade.ts",
+      "max": 1100,
+      "owner": "frontend-architecture",
+      "reason": "Facade split pending bounded VM/command modules.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    },
+    {
+      "file": "src/app/side-bar/courses/services/courses-admin-command-dispatcher.service.ts",
+      "max": 1200,
+      "owner": "frontend-architecture",
+      "reason": "Monolithic transitional dispatcher pending full command-flow split.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    }
+  ],
+  "pageDecompositionDebt": [
+    {
+      "file": "src/app/side-bar/courses/pages/courses-admin.page.ts",
+      "max": 700,
+      "owner": "frontend-architecture",
+      "reason": "Transitional container reduction to thin-page target.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    },
+    {
+      "file": "src/app/side-bar/courses/pages/courses-admin.page.html",
+      "max": 1000,
+      "owner": "frontend-architecture",
+      "reason": "Template extraction in progress while preserving behavior.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    }
+  ],
+  "oversizedUiComponents": [],
+  "uiServiceInjection": [],
+  "browserGlobals": [
+    {
+      "file": "src/app/side-bar/courses/rich-text-editor/rich-text-editor.component.ts",
+      "owner": "courses-refactor",
+      "reason": "Rich-text editing internals still rely on browser DOM APIs.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    }
+  ],
+  "duplicateContracts": [
+    {
+      "name": "CoursesEditorState",
+      "owner": "courses-refactor",
+      "reason": "Transitional overlap between vm and contracts during ownership closure.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    },
+    {
+      "name": "CoursesOpsState",
+      "owner": "courses-refactor",
+      "reason": "Transitional overlap between vm and contracts during ownership closure.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    },
+    {
+      "name": "CoursesUiState",
+      "owner": "courses-refactor",
+      "reason": "Transitional overlap between vm and contracts during ownership closure.",
+      "expiresOn": "2026-06-30",
+      "backlog": "docs/architecture/frontend-remediation-backlog.md#current-exceptions"
+    }
+  ],
+  "nonOnPushUiComponents": []
+}

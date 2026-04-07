@@ -1,0 +1,12 @@
+{
+  "apiBaseUrl": "http://127.0.0.1:8000",
+  "defaultLanguage": "en",
+  "auth": {
+    "enabled": false,
+    "mode": "anonymous"
+  },
+  "legalAi": {
+    "featureEnabled": true,
+    "reservedGatewayPrefix": "/legal-ai"
+  }
+}
