@@ -24,13 +24,28 @@ describe('LegalAiPageComponent', () => {
       jasmine.createSpyObj<LegalAiFacade>('LegalAiFacade', ['dispatch']),
       {
         pageVm: signal<LegalAiPageVm>({
-          title: 'Legal AI workspace',
-          subtitle: 'Reserved workspace',
-          loading: false,
-          statusLabel: 'Gateway ready',
-          statusTone: 'ok',
-          syncMessage: 'Ready',
-          reservedRoutes: ['/legal-ai/ping'],
+          title: 'Employment Compliance Risk Detector',
+          subtitle: 'Demo workspace',
+          draftText: '',
+          includeCommentary: false,
+          loadingSummary: false,
+          analyzing: false,
+          canAnalyze: false,
+          errorMessage: null,
+          modelTypeLabel: 'tfidf_logistic_regression',
+          trainingCountLabel: '120 synthetic training samples',
+          goldMacroF1Label: 'Gold macro F1 0.76',
+          globalFeatureSections: [],
+          samplePolicies: [],
+          hasAnalysis: false,
+          riskLabel: 'No analysis yet',
+          riskTone: 'neutral',
+          reviewMessage: 'Submit text',
+          explanation: 'Explanation placeholder',
+          probabilityBars: [],
+          supportingFeatures: [],
+          againstFeatures: [],
+          openAiCommentary: null,
         }),
       }
     );
@@ -45,6 +60,6 @@ describe('LegalAiPageComponent', () => {
   });
 
   it('dispatches the initial refresh command', () => {
-    expect(facade.dispatch).toHaveBeenCalledWith({ type: 'refresh' });
+    expect(facade.dispatch).toHaveBeenCalledWith({ type: 'initialize' });
   });
 });

@@ -14,7 +14,7 @@ export class LegalAiPageComponent implements OnInit {
   constructor(private readonly legalAiFacade: LegalAiFacade) {}
 
   ngOnInit(): void {
-    this.dispatch({ type: 'refresh' });
+    this.dispatch({ type: 'initialize' });
   }
 
   dispatch(command: LegalAiPageCommand): void {

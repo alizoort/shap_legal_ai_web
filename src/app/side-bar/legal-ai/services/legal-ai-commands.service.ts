@@ -8,9 +8,21 @@ export class LegalAiCommandsService {
 
   dispatch(command: LegalAiPageCommand): void {
     switch (command.type) {
-      case 'refresh':
-      case 'create-placeholder-request':
-        this.flowService.refresh();
+      case 'initialize':
+      case 'refresh-summary':
+        this.flowService.loadModelSummary();
+        return;
+      case 'text-changed':
+        this.flowService.updateDraftText(command.text);
+        return;
+      case 'commentary-toggled':
+        this.flowService.updateIncludeCommentary(command.includeCommentary);
+        return;
+      case 'load-sample':
+        this.flowService.loadSample(command.text);
+        return;
+      case 'analyze':
+        this.flowService.analyzeCurrentDraft();
         return;
     }
   }

@@ -1,37 +1,211 @@
 <section class="legal-ai-workspace panel-area">
   <div class="legal-ai-workspace__hero">
-    <div class="legal-ai-workspace__eyebrow">Reserved scaffold</div>
+    <div class="legal-ai-workspace__eyebrow">Employment / HR compliance demo</div>
     <h1>{{ vm.title }}</h1>
     <p>{{ vm.subtitle }}</p>
 
     <div class="legal-ai-workspace__actions">
-      <button mat-flat-button color="primary" type="button" (click)="emitCommand('refresh')">
-        {{ vm.loading ? 'Refreshing...' : 'Refresh route' }}
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="emitCommand({ type: 'analyze' })"
+        [disabled]="!vm.canAnalyze"
+      >
+        {{ vm.analyzing ? 'Analyzing…' : 'Analyze policy' }}
       </button>
-      <button mat-stroked-button type="button" (click)="emitCommand('create-placeholder-request')">
-        Create placeholder command
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="emitCommand({ type: 'refresh-summary' })"
+        [disabled]="vm.loadingSummary"
+      >
+        {{ vm.loadingSummary ? 'Refreshing model…' : 'Refresh model summary' }}
       </button>
     </div>
   </div>
 
-  <div class="legal-ai-workspace__grid">
-    <mat-card class="legal-ai-workspace__card">
-      <div class="legal-ai-workspace__card-label">Gateway status</div>
-      <div class="legal-ai-workspace__status">
-        <mat-chip [class.legal-ai-workspace__chip--ok]="vm.statusTone === 'ok'">
-          {{ vm.statusLabel }}
-        </mat-chip>
+  <div class="legal-ai-workspace__layout">
+    <mat-card class="legal-ai-workspace__card legal-ai-workspace__card--editor">
+      <div class="legal-ai-workspace__card-label">Policy text</div>
+      <mat-form-field appearance="outline" class="legal-ai-workspace__field">
+        <textarea
+          matInput
+          rows="9"
+          [value]="vm.draftText"
+          (input)="handleEditorInput($event)"
+          placeholder="Paste an HR, hiring, monitoring, termination, compensation, or employee-data policy clause."
+        ></textarea>
+      </mat-form-field>
+
+      <mat-slide-toggle
+        [checked]="vm.includeCommentary"
+        (change)="emitCommentaryChanged($event.checked)"
+      >
+        Include optional OpenAI commentary
+      </mat-slide-toggle>
+
+      <div class="legal-ai-workspace__sample-label">Quick examples</div>
+      <div class="legal-ai-workspace__sample-hint">
+        Pasting a clause or selecting a sample runs the analysis immediately.
       </div>
-      <p>{{ vm.syncMessage }}</p>
+      <div class="legal-ai-workspace__samples">
+        @for (sample of vm.samplePolicies; track sample.id) {
+          <button
+            mat-stroked-button
+            type="button"
+            class="legal-ai-workspace__sample"
+            (click)="loadSample(sample.text)"
+          >
+            {{ sample.label }}
+          </button>
+        }
+      </div>
+
+      @if (vm.errorMessage) {
+        <div class="legal-ai-workspace__error">{{ vm.errorMessage }}</div>
+      }
     </mat-card>
 
-    <mat-card class="legal-ai-workspace__card">
-      <div class="legal-ai-workspace__card-label">Reserved contracts</div>
-      <ul class="legal-ai-workspace__routes">
-        @for (route of vm.reservedRoutes; track route) {
-          <li>{{ route }}</li>
+    <div class="legal-ai-workspace__stack">
+      <mat-card class="legal-ai-workspace__card">
+        <div class="legal-ai-workspace__card-label">Model summary</div>
+        <div class="legal-ai-workspace__summary-grid">
+          <div>
+            <div class="legal-ai-workspace__metric-label">Model</div>
+            <div class="legal-ai-workspace__metric-value">{{ vm.modelTypeLabel }}</div>
+          </div>
+          <div>
+            <div class="legal-ai-workspace__metric-label">Corpus</div>
+            <div class="legal-ai-workspace__metric-value">{{ vm.trainingCountLabel }}</div>
+          </div>
+          <div>
+            <div class="legal-ai-workspace__metric-label">Holdout</div>
+            <div class="legal-ai-workspace__metric-value">{{ vm.goldMacroF1Label }}</div>
+          </div>
+        </div>
+
+        <div class="legal-ai-workspace__global-sections">
+          @if (vm.globalFeatureSections.length) {
+            @for (section of vm.globalFeatureSections; track section.riskLabel) {
+              <div class="legal-ai-workspace__global-section">
+                <div class="legal-ai-workspace__global-label">{{ section.label }} signals</div>
+                <div class="legal-ai-workspace__chips">
+                  @for (feature of section.features; track feature) {
+                    <mat-chip>{{ feature }}</mat-chip>
+                  }
+                </div>
+              </div>
+            }
+          } @else {
+            <div class="legal-ai-workspace__empty-state">
+              Global SHAP signal examples will appear here after the model summary loads.
+            </div>
+          }
+        </div>
+      </mat-card>
+
+      <mat-card class="legal-ai-workspace__card legal-ai-workspace__card--result">
+        <div class="legal-ai-workspace__card-label">Latest analysis</div>
+
+        <div class="legal-ai-workspace__result-header">
+          <mat-chip
+            class="legal-ai-workspace__risk-chip"
+            [ngClass]="'legal-ai-workspace__risk-chip--' + vm.riskTone"
+          >
+            {{ vm.riskLabel }}
+          </mat-chip>
+          <div class="legal-ai-workspace__review">{{ vm.reviewMessage }}</div>
+        </div>
+
+        <p class="legal-ai-workspace__explanation">{{ vm.explanation }}</p>
+
+        @if (vm.hasAnalysis) {
+          <div class="legal-ai-workspace__probabilities">
+            @for (bar of vm.probabilityBars; track bar.label) {
+              <div class="legal-ai-workspace__probability-row">
+                <div class="legal-ai-workspace__probability-label">
+                  {{ bar.label }} <span>{{ bar.valueLabel }}</span>
+                </div>
+                <div class="legal-ai-workspace__probability-track">
+                  <div
+                    class="legal-ai-workspace__probability-fill"
+                    [class.legal-ai-workspace__probability-fill--winner]="bar.isWinner"
+                    [style.width]="bar.width"
+                  ></div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="legal-ai-workspace__feature-grid">
+            <div>
+              <div class="legal-ai-workspace__metric-label">Supporting factors</div>
+              @if (vm.supportingFeatures.length) {
+                <ul class="legal-ai-workspace__feature-list">
+                  @for (feature of vm.supportingFeatures; track feature.term) {
+                    <li>
+                      <span>{{ feature.term }}</span>
+                      <strong>{{ feature.valueLabel }}</strong>
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <div class="legal-ai-workspace__empty-state">
+                  No strong supporting features were returned for this result.
+                </div>
+              }
+            </div>
+
+            <div>
+              <div class="legal-ai-workspace__metric-label">Against prediction</div>
+              @if (vm.againstFeatures.length) {
+                <ul class="legal-ai-workspace__feature-list">
+                  @for (feature of vm.againstFeatures; track feature.term) {
+                    <li>
+                      <span>{{ feature.term }}</span>
+                      <strong>{{ feature.valueLabel }}</strong>
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <div class="legal-ai-workspace__empty-state">
+                  No meaningful counter-signals were identified for this prediction.
+                </div>
+              }
+            </div>
+          </div>
+
+          @if (vm.openAiCommentary) {
+            <div class="legal-ai-workspace__commentary">
+              <div class="legal-ai-workspace__metric-label">OpenAI commentary</div>
+              <p>{{ vm.openAiCommentary.summary }}</p>
+
+              <div class="legal-ai-workspace__commentary-section">
+                <div class="legal-ai-workspace__metric-label">Key concerns</div>
+                <ul class="legal-ai-workspace__text-list">
+                  @for (concern of vm.openAiCommentary.keyConcerns; track concern) {
+                    <li>{{ concern }}</li>
+                  }
+                </ul>
+              </div>
+
+              <div class="legal-ai-workspace__commentary-section">
+                <div class="legal-ai-workspace__metric-label">Recommended next steps</div>
+                <ul class="legal-ai-workspace__text-list">
+                  @for (step of vm.openAiCommentary.recommendedNextSteps; track step) {
+                    <li>{{ step }}</li>
+                  }
+                </ul>
+              </div>
+
+              <div class="legal-ai-workspace__disclaimer">
+                {{ vm.openAiCommentary.disclaimer }}
+              </div>
+            </div>
+          }
         }
-      </ul>
-    </mat-card>
+      </mat-card>
+    </div>
   </div>
 </section>

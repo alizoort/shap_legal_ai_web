@@ -13,7 +13,30 @@ export class LegalAiWorkspaceComponent {
   @Input({ required: true }) vm!: LegalAiPageVm;
   @Output() command = new EventEmitter<LegalAiPageCommand>();
 
-  emitCommand(type: LegalAiPageCommand['type']): void {
-    this.command.emit({ type });
+  emitCommand(command: LegalAiPageCommand): void {
+    this.command.emit(command);
+  }
+
+  emitTextChanged(text: string): void {
+    this.emitCommand({ type: 'text-changed', text });
+  }
+
+  handleEditorInput(event: Event): void {
+    const target = event.target as HTMLTextAreaElement | null;
+    const text = (target?.value ?? '').toString();
+    this.emitTextChanged(text);
+
+    const inputEvent = event as InputEvent;
+    if (inputEvent.inputType === 'insertFromPaste') {
+      this.emitCommand({ type: 'analyze' });
+    }
+  }
+
+  emitCommentaryChanged(includeCommentary: boolean): void {
+    this.emitCommand({ type: 'commentary-toggled', includeCommentary });
+  }
+
+  loadSample(text: string): void {
+    this.emitCommand({ type: 'load-sample', text });
   }
 }

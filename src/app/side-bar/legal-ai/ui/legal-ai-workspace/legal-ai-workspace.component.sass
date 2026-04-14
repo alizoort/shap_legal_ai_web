@@ -1,70 +1,242 @@
 .legal-ai-workspace
-  display: grid
-  gap: 24px
-
-.legal-ai-workspace__hero
-  padding: 28px
-  border-radius: var(--legal-radius-lg)
-  background: linear-gradient(135deg, rgba(16, 36, 53, 0.98), rgba(29, 58, 83, 0.92))
-  color: #fff7e4
-  box-shadow: var(--legal-shadow-soft)
-
-  h1
-    margin-top: 10px
-    font-size: clamp(2rem, 3vw, 3.1rem)
-
-  p
-    margin-top: 12px
-    max-width: 760px
-    color: rgba(255, 247, 228, 0.82)
-
-.legal-ai-workspace__eyebrow
-  display: inline-flex
-  padding: 8px 12px
-  border-radius: 999px
-  background: rgba(217, 179, 106, 0.2)
-  font-size: 12px
-  font-weight: 700
-  letter-spacing: 0.08em
-  text-transform: uppercase
-
-.legal-ai-workspace__actions
   display: flex
-  flex-wrap: wrap
-  gap: 12px
-  margin-top: 22px
+  flex-direction: column
+  gap: 1.5rem
+  color: #0f172a
 
-.legal-ai-workspace__grid
-  display: grid
-  grid-template-columns: repeat(2, minmax(0, 1fr))
-  gap: 20px
+  &__hero
+    padding: 1.5rem
+    border-radius: 1.25rem
+    background: linear-gradient(135deg, #f8fafc 0%, #fef3c7 100%)
+    border: 1px solid rgba(148, 163, 184, 0.25)
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08)
 
-.legal-ai-workspace__card
-  padding: 22px
-  border-radius: var(--legal-radius-md)
-  background: rgba(255, 253, 248, 0.9)
-  box-shadow: var(--legal-shadow-card)
+  &__eyebrow
+    font-size: 0.75rem
+    letter-spacing: 0.18em
+    text-transform: uppercase
+    color: #92400e
+    margin-bottom: 0.75rem
 
-.legal-ai-workspace__card-label
-  font-size: 12px
-  font-weight: 800
-  letter-spacing: 0.08em
-  text-transform: uppercase
-  color: var(--legal-color-ink-muted)
+  &__actions
+    display: flex
+    flex-wrap: wrap
+    gap: 0.75rem
+    margin-top: 1.25rem
 
-.legal-ai-workspace__status
-  margin: 16px 0
+  &__layout
+    display: grid
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr)
+    gap: 1rem
 
-.legal-ai-workspace__chip--ok
-  background: rgba(47, 107, 61, 0.12)
-  color: var(--legal-color-success)
+  &__stack
+    display: flex
+    flex-direction: column
+    gap: 1rem
 
-.legal-ai-workspace__routes
-  margin: 14px 0 0
-  padding-left: 18px
-  display: grid
-  gap: 10px
+  &__card
+    border-radius: 1.1rem
+    border: 1px solid rgba(148, 163, 184, 0.2)
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06)
 
-@media (max-width: 900px)
-  .legal-ai-workspace__grid
-    grid-template-columns: 1fr
+  &__card--editor
+    background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%)
+
+  &__card--result
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)
+
+  &__card-label
+    font-size: 0.78rem
+    letter-spacing: 0.12em
+    text-transform: uppercase
+    color: #64748b
+    margin-bottom: 1rem
+
+  &__field
+    width: 100%
+
+  &__sample-label
+    margin-top: 1.25rem
+    font-size: 0.85rem
+    font-weight: 600
+    color: #475569
+
+  &__sample-hint
+    margin-top: 0.35rem
+    color: #64748b
+    font-size: 0.88rem
+
+  &__samples
+    display: flex
+    flex-wrap: wrap
+    gap: 0.75rem
+    margin-top: 0.75rem
+
+  &__sample
+    justify-content: flex-start
+    text-align: left
+
+  &__error
+    margin-top: 1rem
+    padding: 0.85rem 1rem
+    border-radius: 0.85rem
+    background: #fee2e2
+    color: #991b1b
+    font-size: 0.92rem
+
+  &__summary-grid
+    display: grid
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+    gap: 0.75rem
+    margin-bottom: 1rem
+
+  &__metric-label
+    font-size: 0.75rem
+    text-transform: uppercase
+    letter-spacing: 0.08em
+    color: #64748b
+    margin-bottom: 0.35rem
+
+  &__metric-value
+    font-size: 0.98rem
+    font-weight: 600
+    color: #0f172a
+
+  &__global-sections
+    display: flex
+    flex-direction: column
+    gap: 0.85rem
+
+  &__global-label
+    font-size: 0.9rem
+    font-weight: 600
+    margin-bottom: 0.45rem
+
+  &__chips
+    display: flex
+    flex-wrap: wrap
+    gap: 0.5rem
+
+  &__result-header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: 1rem
+    margin-bottom: 0.85rem
+
+  &__risk-chip
+    font-weight: 700
+
+  &__risk-chip--low
+    background: #dcfce7
+    color: #166534
+
+  &__risk-chip--medium
+    background: #fef3c7
+    color: #92400e
+
+  &__risk-chip--high
+    background: #fee2e2
+    color: #991b1b
+
+  &__risk-chip--neutral
+    background: #e2e8f0
+    color: #334155
+
+  &__review
+    font-weight: 600
+    color: #334155
+
+  &__explanation
+    margin: 0 0 1rem
+    color: #334155
+
+  &__probabilities
+    display: flex
+    flex-direction: column
+    gap: 0.8rem
+    margin-bottom: 1rem
+
+  &__probability-row
+    display: flex
+    flex-direction: column
+    gap: 0.35rem
+
+  &__probability-label
+    display: flex
+    justify-content: space-between
+    font-size: 0.9rem
+
+  &__probability-track
+    width: 100%
+    height: 0.65rem
+    border-radius: 999px
+    background: #e2e8f0
+    overflow: hidden
+
+  &__probability-fill
+    height: 100%
+    border-radius: 999px
+    background: linear-gradient(90deg, #94a3b8 0%, #64748b 100%)
+
+  &__probability-fill--winner
+    background: linear-gradient(90deg, #0f766e 0%, #f59e0b 50%, #b91c1c 100%)
+
+  &__feature-grid
+    display: grid
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+    gap: 1rem
+    margin-bottom: 1rem
+
+  &__feature-list
+    list-style: none
+    margin: 0
+    padding: 0
+    display: flex
+    flex-direction: column
+    gap: 0.55rem
+
+    li
+      display: flex
+      justify-content: space-between
+      gap: 1rem
+      padding: 0.6rem 0.8rem
+      border-radius: 0.85rem
+      background: #f8fafc
+
+  &__empty-state
+    padding: 0.75rem 0.85rem
+    border-radius: 0.85rem
+    background: #f8fafc
+    color: #64748b
+    font-size: 0.92rem
+
+  &__commentary
+    padding: 1rem
+    border-radius: 1rem
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%)
+    border: 1px solid rgba(59, 130, 246, 0.12)
+
+  &__commentary-section
+    margin-top: 0.85rem
+
+  &__text-list
+    margin: 0
+    padding-left: 1rem
+    color: #334155
+
+  &__disclaimer
+    margin-top: 0.85rem
+    font-size: 0.84rem
+    color: #64748b
+
+@media (max-width: 960px)
+  .legal-ai-workspace
+    &__layout
+      grid-template-columns: 1fr
+
+    &__summary-grid
+      grid-template-columns: 1fr
+
+    &__feature-grid
+      grid-template-columns: 1fr

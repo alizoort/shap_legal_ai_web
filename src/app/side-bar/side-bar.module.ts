@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { LegalAiPageComponent } from './legal-ai/pages/legal-ai.page';
 import { LegalAiWorkspaceComponent } from './legal-ai/ui/legal-ai-workspace/legal-ai-workspace.component';
@@ -27,7 +30,10 @@ import { SideNavComponent } from './shell/ui/side-nav/side-nav.component';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
+    MatSlideToggleModule,
   ],
 })
 export class SideBarModule {}

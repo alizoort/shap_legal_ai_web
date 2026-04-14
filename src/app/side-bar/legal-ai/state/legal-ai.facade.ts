@@ -14,7 +14,15 @@ export class LegalAiFacade {
 
   readonly pageVm = computed<LegalAiPageVm>(() => {
     const state = this.store.state();
-    return buildLegalAiPageVm(state.snapshot, state.loading);
+    return buildLegalAiPageVm(
+      state.summary,
+      state.latestAnalysis,
+      state.loadingSummary,
+      state.analyzing,
+      state.draftText,
+      state.includeCommentary,
+      state.errorMessage
+    );
   });
 
   dispatch(command: LegalAiPageCommand): void {
